@@ -1,7 +1,26 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
 
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
+    <!--je pense que c'est ici qu'on va commencer à appliquer notre boostrap-->
+    <ul>
+    {% for auction in auctions %}
+
+        <p>
+            <img src="{{ auction.image }}">
+            <li><strong> {{ auction.title}} </strong></li>
+            <li><strong> Prix: {{ auction.price}} Fcfa </strong> </li>
+            <li>{{ auction.date}}</li>
+           
+        </p>
+
+        
+         <!--Au cas où il n'y a rien sur la page-->
+    {% empty %}
+    <p>Il n'y pas de vente disponible</p>
+    {% endfor %}
+    </ul>
+   
 {% endblock %}
