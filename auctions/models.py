@@ -13,7 +13,7 @@ class User(AbstractUser):
 class Auctions(models.Model):
     name = models.CharField(max_length=200)
     title = models.TextField(max_length=100)
-    image = models.ImageField(upload_to="images/", height_field=None, width_field=None, max_length=100)
+    image = models.ImageField(upload_to="images/", null=True, blank=True)
     description = models.TextField(max_length=100)
     price = models.IntegerField()
     # la date à laquelle l'utilisateur va créer sa vente 
