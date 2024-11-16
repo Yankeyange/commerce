@@ -2,25 +2,41 @@
 {% load static %}
 
 {% block body %}
+
+    
     <h2>Active Listings</h2>
 
     <!--je pense que c'est ici qu'on va commencer à appliquer notre boostrap-->
     <ul>
     {% for auction in auctions %}
 
-        <p>
-            <img src="{{ auction.image }}">
-            <li><strong> {{ auction.title}} </strong></li>
-            <li><strong> Prix: {{ auction.price}} Fcfa </strong> </li>
-            <li>{{ auction.date}}</li>
-           
-        </p>
-
+    <div class="card">
+    <div class="container mt-5">
         
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-fluid rounded" src="{{ auction.image }}">
+            </div>
+            <div class="col-md-8">
+                <h3><strong> {{ auction.title}} </strong></h3>
+                <p> <strong> Prix: </strong>{{ auction.price}} Fcfa </p>
+                <p>{{ auction.description }}</p>
+                <p>{{ auction.date}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
          <!--Au cas où il n'y a rien sur la page-->
     {% empty %}
     <p>Il n'y pas de vente disponible</p>
     {% endfor %}
     </ul>
-   
+
+    <style>
+        .card {
+            margin-top: 15px;
+        }
+    </style>
 {% endblock %}
