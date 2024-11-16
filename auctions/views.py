@@ -1,14 +1,17 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
+from .forms import AuctionsForm
 
-from .models import User
+from .models import User, Auctions, Bids, Comment
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    auctions = Auctions.objects.all()
+    context = {'auctions': auctions}
+    return render(request, "auctions/index.html", context)
 
 
 def login_view(request):
@@ -64,7 +67,23 @@ def register(request):
 
 
 def CreateListing(request):
-    return render(request, "CreateListing.html")
+  
+  if request.method != 'POST':
+    # form va iriter de TopicForm
+    form = AuctionsForm()
+  
+  else:
+    form = AuctionsForm(data=request.POST)
+
+    if form.is_valid():
+      # si le formulaire est valid on sauvegarde
+      form.save()
+      # et on retourne à topics
+      return redirect('index')
+  context = {'form':form}
+
+  return render(request, "CreateListing.html", context)
+
 
 def Watchlist(request):
     return render(request, "Watchlist.html")
