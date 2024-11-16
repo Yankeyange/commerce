@@ -120,7 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL ='images/'
+# lorsque je mets le MEDIA_URL une seule image sortira mais quand je mets le root plusieurs images peuvent sortir
+MEDIA_ROOT ='images/'
 STATICFILES_DIRS =['static']
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images/')
 
