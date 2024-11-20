@@ -22,13 +22,26 @@ class Auctions(models.Model):
     def __str__(self):
         return self.name
     
+"""
+    
 # modèles pour les offres(bids)
 
 class Bids(models.Model):
+    # ici l'utilisateur peut donner un prix mais peut ne pas commenter
     price = models.IntegerField()
 
 
 # modèles pour les commentaires
 
 class Comment(models.Model):
+    # ici l'utilisateur peut commenter mais peut ne pas lacher un prix
     text = models.ForeignKey(Auctions, on_delete=models.CASCADE)
+
+    # je ne sais pas si je dois créer encore un modèle c'est un peu frustant tout cela
+"""
+
+class Details(models.Model):
+    # le prix minimum qui doit être 
+    min_price = models.PositiveIntegerField(default=1000)
+    # pour gerer les commentaires de l'utilisateur
+    comment = models.ForeignKey(Auctions, on_delete=models.CASCADE)
