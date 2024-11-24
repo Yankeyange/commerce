@@ -5,13 +5,22 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import AuctionsForm
 
-from .models import User, Auctions, Bids, Comment
+from .models import User, Auctions, Details
 
 
 def index(request):
     auctions = Auctions.objects.all()
     context = {'auctions': auctions}
     return render(request, "auctions/index.html", context)
+
+# créons un détail de chaque page
+
+def details(request, details_id):
+    autions = Auctions.objects.get(id=details_id)
+    takes = autions.entry_set.all()
+    context = {'autions':autions, 'takes':takes}
+    return render(request, "details.html", context)
+
 
 
 def login_view(request):
@@ -73,16 +82,15 @@ def CreateListing(request):
     form = AuctionsForm()
   
   else:
-    form = AuctionsForm(data=request.POST)
+    form = AuctionsForm(request.POST, request.FILES)
 
     if form.is_valid():
       # si le formulaire est valid on sauvegarde
       form.save()
       # et on retourne à topics
       return redirect('index')
-  context = {'form':form}
-
-  return render(request, "CreateListing.html", context)
+    
+  return render(request, "CreateListing.html", {'form':form})
 
 
 def Watchlist(request):
