@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    
+    <h2>Views de chaque page</h2>
+
+   <!-- maintenant affichons la partie commentaire--> 
+   <p> {{ auction }}</p>
+
+    <ul>
+      {% for take in takes %}
+      <p>
+      <li>{{ take.comment }}</li>
+      <li>{{ take.min_price }}</li>
+    </p>
+    {% empty %}
+    <li>Il n'y a pas de commentaire ou d'enchère disponible actuellement </li>
+
+    {% endfor %}
+    </ul>
+{% endblock %}
