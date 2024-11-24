@@ -17,13 +17,20 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from auctions.views import CreateListing, Watchlist, Categories
+from auctions.views import CreateListing, Watchlist, Categories, details,index
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # pour créer une nouvelle vente
     path("CreateListing",CreateListing, name="CreateListing"),
+    # pour regarder toute les ventes actuelles
     path("Watchlist",Watchlist, name="Watchlist"),
+    # les différentes catégories
     path("Categories",Categories, name="Categories"),
+    # les détails de chaque ventes
+    path("index/<int:details_id>/", details, name="details"),
+    path("index/", index, name="index"),
+
     path("", include("auctions.urls"))
 ]
 
