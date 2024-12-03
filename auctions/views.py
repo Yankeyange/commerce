@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import AuctionsForm
 
-from .models import User, Auctions, Details
+from .models import User, Auctions, Bids, Comment
 
 
 def index(request):
@@ -15,12 +15,14 @@ def index(request):
 
 # créons un détail de chaque page
 
-def details(request, details_id):
-    autions = Auctions.objects.get(id=details_id)
-    takes = autions.entry_set.all()
-    context = {'autions':autions, 'takes':takes}
-    return render(request, "details.html", context)
 
+def details(request, details_id):
+    auctions = Auctions.objects.get(id=details_id)
+    # entries = auctions.entry_set.all()
+    # context = {'autions':auctions, 'entries':entries}
+    context = {'autions':auctions}
+
+    return render(request, "auctions/details.html", context)
 
 
 def login_view(request):

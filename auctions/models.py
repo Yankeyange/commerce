@@ -10,6 +10,27 @@ class User(AbstractUser):
 
 # modèles pour les enchères(Auctions)
 
+class Comment(models.Model):
+    # ici l'utilisateur peut commenter mais peut ne pas lacher un prix
+    text = models.TextField(max_length=10000)
+    # auction = models.ForeignKey(Auctions , on_delete=models.CASCADE)
+    
+# modèles pour les offres(bids)
+class Bids(models.Model):
+    # ici l'utilisateur peut donner un prix mais peut ne pas commenter
+    price = models.IntegerField(default=1000)
+
+# ajouter une catégories
+
+class Category(models.Model):
+    category = models.CharField(max_length=100)
+
+
+# modèles pour les commentaires
+
+
+
+
 class Auctions(models.Model):
     name = models.CharField(max_length=200)
     title = models.TextField(max_length=100)
@@ -18,30 +39,12 @@ class Auctions(models.Model):
     price = models.IntegerField()
     # la date à laquelle l'utilisateur va créer sa vente 
     date = models.DateTimeField(auto_now_add=True)
-
+    # permettre à chaque utilisateur de laisser un commentaire
+    
+   
     def __str__(self):
         return self.name
     
-"""
+
     
-# modèles pour les offres(bids)
 
-class Bids(models.Model):
-    # ici l'utilisateur peut donner un prix mais peut ne pas commenter
-    price = models.IntegerField()
-
-
-# modèles pour les commentaires
-
-class Comment(models.Model):
-    # ici l'utilisateur peut commenter mais peut ne pas lacher un prix
-    text = models.ForeignKey(Auctions, on_delete=models.CASCADE)
-
-    # je ne sais pas si je dois créer encore un modèle c'est un peu frustant tout cela
-"""
-
-class Details(models.Model):
-    # le prix minimum qui doit être 
-    min_price = models.PositiveIntegerField(default=1000)
-    # pour gerer les commentaires de l'utilisateur
-    comment = models.ForeignKey(Auctions, on_delete=models.CASCADE)
