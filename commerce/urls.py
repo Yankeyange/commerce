@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from auctions.views import CreateListing, Watchlist, Categories, details,index
+from auctions.views import CreateListing, Watchlist, Categories,details
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,9 +28,9 @@ urlpatterns = [
     # les différentes catégories
     path("Categories",Categories, name="Categories"),
     # les détails de chaque ventes
-    path("index/<int:details_id>/", details, name="details"),
-    path("index/", index, name="index"),
-
+    path("<int:details_id>/" , details, name="details"),
+    # page pour ajouter des détails de chaque page
+    #path("new_details/<int:rep>/", new_details, name="new_details"),
     path("", include("auctions.urls"))
 ]
 
