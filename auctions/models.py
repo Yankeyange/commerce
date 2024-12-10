@@ -8,12 +8,13 @@ from django.db import models
 class User(AbstractUser):
     pass
 
-# modèles pour les enchères(Auctions)
+
+# modèles pour les commentaires
 
 class Comment(models.Model):
     # ici l'utilisateur peut commenter mais peut ne pas lacher un prix
     text = models.TextField(max_length=10000)
-    # auction = models.ForeignKey(Auctions , on_delete=models.CASCADE)
+
     
 # modèles pour les offres(bids)
 class Bids(models.Model):
@@ -26,11 +27,8 @@ class Category(models.Model):
     category = models.CharField(max_length=100)
 
 
-# modèles pour les commentaires
 
-
-
-
+# modèles pour les enchères(Auctions)
 class Auctions(models.Model):
     name = models.CharField(max_length=200)
     title = models.TextField(max_length=100)
@@ -46,5 +44,17 @@ class Auctions(models.Model):
         return self.name
     
 
+# pour les détails de chaque page
+#class Entry(models.Model):
+"""
+    details = models.ForeignKey(Auctions, on_delete=models.CASCADE)
+    text = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = "entries"
+
+    def __str__(self):
+        return f"{self.text[:50]}..."
+"""
     
 

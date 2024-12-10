@@ -16,10 +16,12 @@ def index(request):
 # créons un détail de chaque page
 
 
+
+
 def details(request, details_id):
     auctions = Auctions.objects.get(id=details_id)
-    # entries = auctions.entry_set.all()
-    # context = {'autions':auctions, 'entries':entries}
+    #entries = auctions.entry_set.all()
+    #context = {'autions':auctions, 'entries':entries}
     context = {'autions':auctions}
 
     return render(request, "auctions/details.html", context)
@@ -95,6 +97,29 @@ def CreateListing(request):
   return render(request, "CreateListing.html", {'form':form})
 
 
+"""
+def new_details(request, rep):
+       
+       details = Auctions.objects.get(id=rep)
+
+       if request.method != 'POST':
+           # .
+          form = EntryForm()
+       else:
+           # .
+            form = EntryForm(data=request.POST)
+            if form.is_valid():
+              
+              new_entry = form.save(commit=False)
+              new_entry.details = details
+              new_entry.save()
+              return redirect('details', rep=rep)
+       # 
+            context = {'details': details, 'form': form}
+       return render(request, 'learning_logs/new_entry.html', context)
+    
+
+"""
 def Watchlist(request):
     return render(request, "Watchlist.html")
 
