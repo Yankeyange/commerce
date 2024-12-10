@@ -6,7 +6,7 @@ les prix et tout autres choses
 
 ### langages de programmation 
 
--Python
--HTML
+.Python
+.HTML
 -CSS (Bootstrap )
 -Django
